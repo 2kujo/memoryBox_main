@@ -16,7 +16,7 @@ spec:
         app: memorybox-main
     spec:
       containers:
-        - name: memory-box-main
+        - name: memorybox-main
           image: docker.io/ikujo/memorybox-main:latest
           imagePullPolicy: Always
           env:
