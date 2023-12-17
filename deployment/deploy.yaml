@@ -38,7 +38,7 @@ spec:
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: memorybox
+  name: memorybox-main
   namespace: ikujo
 data:
   DB_SERVER: mysql
@@ -50,7 +50,7 @@ data:
 kind: Secret
 apiVersion: v1
 metadata:
-  name: memorybox
+  name: memorybox-main
   namespace: ikujo
 type: Opaque
 data:
