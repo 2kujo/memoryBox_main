@@ -1,12 +1,11 @@
-
 spring:
   application:
-    name: memoryBox_main
+    name: memoryBox_external
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${DB_SERVER:localhost}:${DB_PORT:3306}/${DB_NAME:memory_box}?useUnicode=true&characterEncoding=utf-8
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:P@ssw0rd$}
+    url: jdbc:mysql://${DB_SERVER:165.192.105.57}:${DB_PORT:30135}/${DB_NAME:memory_box}?useUnicode=true&characterEncoding=utf-8
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     hikari:
       connection-timeout: 5000
       validation-timeout: 1000
