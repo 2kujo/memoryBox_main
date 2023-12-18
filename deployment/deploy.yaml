@@ -87,10 +87,17 @@ spec:
     - host: memorybox-ikujo.165.192.105.60.nip.io
       http:
         paths:
-          - path: /(.*)
+          - path: /cashbox
             pathType: Prefix
             backend:
               service:
                 name: memorybox-main
                 port:
                   number: 8080
+          - path: /cert
+            pathType: Prefix
+            backend:
+              service:
+                name: memorybox-cert
+                port:
+                  number: 8081
