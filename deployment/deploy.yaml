@@ -1,5 +1,5 @@
-apiVersion: apps/v1
 kind: Deployment
+apiVersion: apps/v1
 metadata:
   name: memorybox-main
   labels:
@@ -38,10 +38,10 @@ spec:
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: memorybox
+  name: memorybox-main
   namespace: ikujo
 data:
-  DB_SERVER: mysql
+  DB_SERVER: svc-mysql
   DB_PORT: "3306"
   DB_NAME: "memory_box"
 
@@ -50,7 +50,7 @@ data:
 kind: Secret
 apiVersion: v1
 metadata:
-  name: memorybox
+  name: memorybox-main
   namespace: ikujo
 type: Opaque
 data:
