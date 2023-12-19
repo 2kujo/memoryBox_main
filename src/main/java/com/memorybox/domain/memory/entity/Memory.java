@@ -1,4 +1,4 @@
-package com.memorybox.domain.entity;
+package com.memorybox.domain.memory.entity;
 
 import jakarta.persistence.*;
 import lombok.Builder;

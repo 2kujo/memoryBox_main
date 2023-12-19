@@ -1,6 +1,6 @@
 package com.memorybox.dto.response;
 
-import com.memorybox.domain.entity.Memory;
+import com.memorybox.domain.memory.entity.Memory;
 import lombok.Builder;
 
 import java.time.LocalDateTime;

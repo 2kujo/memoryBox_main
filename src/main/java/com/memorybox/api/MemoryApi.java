@@ -1,6 +1,6 @@
 package com.memorybox.api;
 
-import com.memorybox.domain.service.MemoryService;
+import com.memorybox.domain.memory.service.MemoryService;
 import com.memorybox.dto.request.MemoryCreateRequestDto;
 import com.memorybox.dto.response.MemoryListResponseDto;
 import com.memorybox.dto.response.MemoryResponseDto;

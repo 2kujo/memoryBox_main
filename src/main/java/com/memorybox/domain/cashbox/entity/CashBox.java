@@ -1,20 +1,18 @@
-package com.memorybox.domain.entity;
+package com.memorybox.domain.cashbox.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.data.relational.core.mapping.Column;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+@EntityListeners(AuditingEntityListener.class)
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class CashBox {
     @Id
@@ -28,7 +26,7 @@ public class CashBox {
     private String name;
 
     @Column
-    private Long description;
+    private String description;
 
     @Column
     private String thumbnail;
@@ -43,13 +41,14 @@ public class CashBox {
     private String productName;
 
     @Column
-    private int externalId;
+    private long coreBankId;
+
+    @CreatedDate
+    @Column
+    private LocalDateTime createdAt;
 
     @Column
-    private LocalDate createdAt;
-
-    @Column
-    private LocalDate start_date;
+    private LocalDate startDate;
 
     @Column
     private Boolean maturityEnabled;
@@ -58,7 +57,7 @@ public class CashBox {
     private LocalDate maturityDate;
 
     @Builder
-    public CashBox(Long userId, String name, Long description, String thumbnail, String accountNum, int balance, String productName, int externalId, LocalDate createdAt, LocalDate start_date, Boolean maturityEnabled, LocalDate maturityDate) {
+    public CashBox(Long userId, String name, String description, String thumbnail, String accountNum, int balance, String productName, long coreBankId, LocalDateTime createdAt, LocalDate startDate, Boolean maturityEnabled, LocalDate maturityDate) {
         this.userId = userId;
         this.name = name;
         this.description = description;
@@ -66,9 +65,9 @@ public class CashBox {
         this.accountNum = accountNum;
         this.balance = balance;
         this.productName = productName;
-        this.externalId = externalId;
+        this.coreBankId = coreBankId;
         this.createdAt = createdAt;
-        this.start_date = start_date;
+        this.startDate = startDate;
         this.maturityEnabled = maturityEnabled;
         this.maturityDate = maturityDate;
     }

@@ -1,4 +1,8 @@
 package com.memorybox.dto.response;
 
-public record CashBoxListResponseDto() {
+import java.util.List;
+
+public record CashBoxListResponseDto(
+        List<CashBoxListDto> cashBoxList
+) {
 }

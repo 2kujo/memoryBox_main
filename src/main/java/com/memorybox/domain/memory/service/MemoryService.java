@@ -1,7 +1,7 @@
-package com.memorybox.domain.service;
+package com.memorybox.domain.memory.service;
 
-import com.memorybox.domain.entity.Memory;
-import com.memorybox.domain.repository.MemoryRepository;
+import com.memorybox.domain.memory.repository.MemoryRepository;
+import com.memorybox.domain.memory.entity.Memory;
 import com.memorybox.dto.request.MemoryCreateRequestDto;
 import com.memorybox.dto.response.MemoryListDto;
 import com.memorybox.dto.response.MemoryListResponseDto;

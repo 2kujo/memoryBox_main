@@ -1,5 +1,8 @@
 package com.memorybox.api;
 
+import com.memorybox.domain.cashbox.service.CashBoxReadService;
+import com.memorybox.domain.cashbox.service.CashBoxWriteService;
+import com.memorybox.dto.request.CashBoxCreateRequestDto;
 import com.memorybox.dto.request.CashBoxGetRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -9,17 +12,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/cash-boxes")
 @RestController
 public class CashBoxApi {
+    private final CashBoxReadService cashBoxReadService;
+    private final CashBoxWriteService cashBoxWriteService;
+
     @GetMapping("")
-    public ResponseEntity<?> getCashBoxList(@CookieValue("memorybox-user-id") long userId, @RequestBody CashBoxGetRequestDto requestDto) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity<?> getCashBoxList(@CookieValue("memorybox-user-id") long userId, @RequestParam Boolean maturityEnabled) {
+        return ResponseEntity.ok(cashBoxReadService.getCashBoxList(userId));
     }
 
     @GetMapping("/{cashBoxId}")
     public ResponseEntity<?> getCashBox(@CookieValue("memorybox-user-id") long userId, @PathVariable long cashBoxId) {
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(cashBoxReadService.getCashBox(userId));
     }
     @PostMapping("cash-boxes")
-    public ResponseEntity<?> createCashBox() {
+    public ResponseEntity<?> createCashBox(@CookieValue("memorybox-user-id") long userId, @RequestBody CashBoxCreateRequestDto cashBoxCreateRequestDto) {
         return ResponseEntity.ok().build();
     }
 }
