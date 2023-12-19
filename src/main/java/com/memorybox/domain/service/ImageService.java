@@ -12,7 +12,7 @@ import java.util.UUID;
 @Service
 public class ImageService {
 
-    public static final String UPLOAD_FOLDER = "/";
+    public static final String UPLOAD_FOLDER = "/root/data/";
 
     public List<String> saveImages(List<MultipartFile> imageFiles) {
         List<String> imageNames = new ArrayList<>();
