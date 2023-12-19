@@ -31,21 +31,22 @@ public class CashBox {
     @Column
     private String thumbnail;
 
+    @CreatedDate
+    @Column
+    private LocalDateTime createdAt;
+
+    // CoreBank 에서 가져온 계좌 정보
+    @Column
+    private long coreBankId;
+
     @Column
     private String accountNum;
 
     @Column
-    int balance;
+    private int balance;
 
     @Column
     private String productName;
-
-    @Column
-    private long coreBankId;
-
-    @CreatedDate
-    @Column
-    private LocalDateTime createdAt;
 
     @Column
     private LocalDate startDate;
