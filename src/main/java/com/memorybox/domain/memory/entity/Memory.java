@@ -1,16 +1,21 @@
 package com.memorybox.domain.memory.entity;
 
+import com.memorybox.domain.entity.vo.Image;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @EntityListeners(AuditingEntityListener.class)
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Memory {
 
@@ -29,8 +34,11 @@ public class Memory {
     @Column
     private int depositAmount;
 
-    @Column
-    private List<String> images;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "image",
+            joinColumns = @JoinColumn(name = "memory_id"))
+    @OrderColumn(name = "line_idx")
+    private List<Image> images;
 
     @CreatedDate
     @Column(updatable = false)
@@ -42,6 +50,12 @@ public class Memory {
         this.title = title;
         this.content = content;
         this.depositAmount = depositAmount;
-        this.images = images;
+        saveImages(images);
+    }
+
+    private void saveImages(List<String> imageNames) {
+        this.images = imageNames.stream()
+                .map(Image::new)
+                .collect(Collectors.toList());
     }
 }

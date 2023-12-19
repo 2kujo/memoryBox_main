@@ -1,5 +1,7 @@
 package com.memorybox.dto.request;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 public record MemoryCreateRequestDto(
@@ -10,6 +12,6 @@ public record MemoryCreateRequestDto(
 
         int depositAmount,
 
-        List<String>images
+        List<MultipartFile> imageFiles
 ) {
 }

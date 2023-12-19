@@ -32,8 +32,7 @@ public class MemoryApi {
     }
 
     @PostMapping("/memories")
-    public ResponseEntity<?> createMemory(@PathVariable long cashBoxId, @RequestBody MemoryCreateRequestDto requestDto) {
-        //TODO 이미지 저장 로직 추가
+    public ResponseEntity<?> createMemory(@PathVariable long cashBoxId, @ModelAttribute MemoryCreateRequestDto requestDto) {
         memoryService.createMemory(cashBoxId, requestDto);
 
         return ResponseEntity.ok().build();
