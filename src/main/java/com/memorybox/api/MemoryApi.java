@@ -2,6 +2,7 @@ package com.memorybox.api;
 
 import com.memorybox.domain.memory.service.MemoryService;
 import com.memorybox.dto.request.MemoryCreateRequestDto;
+import com.memorybox.dto.response.MemoryCreateResponseDto;
 import com.memorybox.dto.response.MemoryListResponseDto;
 import com.memorybox.dto.response.MemoryResponseDto;
 import com.memorybox.usecase.MemoryDepositUseCase;
@@ -38,7 +39,9 @@ public class MemoryApi {
 
     @PostMapping("/memories")
     public ResponseEntity<?> createMemory(@PathVariable long cashBoxId, @ModelAttribute MemoryCreateRequestDto requestDto) {
-        memoryDepositUseCase.createMemoryAndDeposit(cashBoxId, requestDto);
-        return ResponseEntity.ok().build();
+        log.info(" [REQUEST] method = createMemory / cashBoxId : {}, requestDto : {}", cashBoxId, requestDto);
+        MemoryCreateResponseDto responseDto = memoryDepositUseCase.createMemoryAndDeposit(cashBoxId, requestDto);
+        log.info(" [RESPONSE] method = createMemory / MemoryCreateResponseDto : {} ", responseDto);
+        return ResponseEntity.ok(responseDto);
     }
 }

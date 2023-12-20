@@ -10,8 +10,11 @@ public record MemoryCreateRequestDto(
 
         String content,
 
-        int depositAmount,
+        String depositAmount,
 
         List<MultipartFile> imageFiles
 ) {
+    public int getDepositAmount() {
+        return Integer.parseInt(this.depositAmount);
+    }
 }

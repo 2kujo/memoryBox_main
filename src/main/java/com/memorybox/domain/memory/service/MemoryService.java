@@ -3,6 +3,7 @@ package com.memorybox.domain.memory.service;
 import com.memorybox.domain.memory.repository.MemoryRepository;
 import com.memorybox.domain.memory.entity.Memory;
 import com.memorybox.dto.request.MemoryCreateRequestDto;
+import com.memorybox.dto.response.MemoryCreateResponseDto;
 import com.memorybox.dto.response.MemoryListDto;
 import com.memorybox.dto.response.MemoryListResponseDto;
 import com.memorybox.dto.response.MemoryResponseDto;
@@ -39,16 +40,17 @@ public class MemoryService {
     }
 
     @Transactional
-    public void createMemory(long cashBoxId, MemoryCreateRequestDto requestDto, List<String> imageNames) {
+    public MemoryCreateResponseDto createMemory(long cashBoxId, MemoryCreateRequestDto requestDto, List<String> imageNames) {
         log.info(" Service: createMemory / cashBoxId : {}, MemoryCreateRequestDto : {}, imageNames : {}",
                 cashBoxId, requestDto, imageNames);
         Memory createMemory = Memory.builder()
                 .cashBoxId(cashBoxId)
                 .title(requestDto.title())
                 .content(requestDto.content())
-                .depositAmount(requestDto.depositAmount())
+                .depositAmount(requestDto.getDepositAmount())
                 .images(imageNames)
                 .build();
-        memoryRepository.save(createMemory);
+        Memory memory = memoryRepository.save(createMemory);
+        return new MemoryCreateResponseDto(memory.getId());
     }
 }
