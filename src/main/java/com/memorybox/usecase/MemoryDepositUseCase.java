@@ -25,12 +25,16 @@ public class MemoryDepositUseCase {
 
     @Transactional
     public void createMemoryAndDeposit(long cashBoxId, MemoryCreateRequestDto requestDto) {
+        log.info(" >>> CreateMemoryAndDeposit Start!");
         List<MultipartFile> imageFiles = requestDto.imageFiles();
         List<String> imageNames = imageService.saveImages(imageFiles);
-
+        log.info("  Finish Image Save!");
         memoryService.createMemory(cashBoxId, requestDto, imageNames);
+        log.info("  Finish Memory Save!");
         coreBankAPIService.depositMoney(cashBoxId, requestDto.depositAmount());
+        log.info("  Finish Core Api Call!");
         cashBoxWriteService.updateBalance(cashBoxId, requestDto.depositAmount());
+        log.info("  Finish CashBox Save!");
     }
 
 }

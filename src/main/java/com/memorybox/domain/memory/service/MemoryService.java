@@ -7,12 +7,14 @@ import com.memorybox.dto.response.MemoryListDto;
 import com.memorybox.dto.response.MemoryListResponseDto;
 import com.memorybox.dto.response.MemoryResponseDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class MemoryService {
@@ -38,6 +40,8 @@ public class MemoryService {
 
     @Transactional
     public void createMemory(long cashBoxId, MemoryCreateRequestDto requestDto, List<String> imageNames) {
+        log.info(" Service: createMemory / cashBoxId : {}, MemoryCreateRequestDto : {}, imageNames : {}",
+                cashBoxId, requestDto, imageNames);
         Memory createMemory = Memory.builder()
                 .cashBoxId(cashBoxId)
                 .title(requestDto.title())

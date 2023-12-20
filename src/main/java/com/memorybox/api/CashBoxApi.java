@@ -5,9 +5,11 @@ import com.memorybox.domain.cashbox.service.CashBoxWriteService;
 import com.memorybox.dto.request.CashBoxCreateRequestDto;
 import com.memorybox.usecase.CreateCashBoxUsecase;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/cash-boxes")
 @RestController
@@ -19,20 +21,24 @@ public class CashBoxApi {
 
     @GetMapping
     public ResponseEntity<?> getCashBoxList(@CookieValue(MEMORYBOX_USER_ID) long userId, @RequestParam boolean isFinished) {
+        log.info(" [REQUEST] method = getCashBoxList / userId : {}, isFinished : {}", userId, isFinished);
         return ResponseEntity.ok(cashBoxReadService.getCashBoxList(userId, isFinished));
     }
 
     @GetMapping("/{cashBoxId}")
     public ResponseEntity<?> getCashBox(@PathVariable long cashBoxId) {
+        log.info(" [REQUEST] method = getCashBox / cashBoxId : {}", cashBoxId);
         return ResponseEntity.ok(cashBoxReadService.getCashBox(cashBoxId));
     }
     @PostMapping
     public ResponseEntity<?> createCashBox(@CookieValue(MEMORYBOX_USER_ID) long userId, @RequestBody CashBoxCreateRequestDto cashBoxCreateRequestDto) {
+        log.info(" [REQUEST] method = createCashBox / userId : {}, cashBoxCreateRequestDto : {}", userId, cashBoxCreateRequestDto);
         createCashBoxUsecase.execute(userId, cashBoxCreateRequestDto);
         return ResponseEntity.ok().build();
     }
     @PatchMapping("/{cashBoxId}")
     public ResponseEntity<?> updateCashBox(@PathVariable long cashBoxId) {
+        log.info(" [REQUEST] method = updateCashBox / cashBoxId : {}", cashBoxId);
         cashBoxWriteService.updateCashBox(cashBoxId);
         return ResponseEntity.ok().build();
     }

@@ -22,7 +22,7 @@ public class ImageService {
         List<String> imageNames = new ArrayList<>();
         for (MultipartFile file : imageFiles) {
             String imageFileName = saveImage(file);
-            log.info(" >>> Save Image file name = %s", imageFileName);
+            log.info(" >>> Save Image file name = {}", imageFileName);
             imageNames.add(imageFileName);
         }
         return imageNames;
