@@ -16,16 +16,14 @@ public class MemoryApi {
     private final MemoryService memoryService;
 
     @GetMapping("/memories")
-    public ResponseEntity<?> getMemoryList(@CookieValue("memorybox-user-id") long userId,
-                                         @PathVariable long cashBoxId) {
+    public ResponseEntity<?> getMemoryList(@PathVariable long cashBoxId) {
         MemoryListResponseDto responseDto = memoryService.getMemoryList(cashBoxId);
 
         return ResponseEntity.ok(responseDto);
     }
 
     @GetMapping("/memories/{memoryId}")
-    public ResponseEntity<?> getMemories(@CookieValue("memorybox-user-id") long userId,
-                                         @PathVariable long memoryId) {
+    public ResponseEntity<?> getMemory(@PathVariable long memoryId) {
         MemoryResponseDto dto = memoryService.getMemory(memoryId);
 
         return ResponseEntity.ok(dto);
