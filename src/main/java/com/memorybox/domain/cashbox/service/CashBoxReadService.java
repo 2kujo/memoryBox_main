@@ -15,11 +15,12 @@ import java.util.stream.Collectors;
 public class CashBoxReadService {
     private final CashBoxRepository cashBoxRepository;
 
-    public CashBoxListResponseDto getCashBoxList(long userId) {
+    public CashBoxListResponseDto getCashBoxList(long userId, boolean isFinished) {
         List<CashBox> cashBoxList = cashBoxRepository.findAllByUserId(userId);
         List<CashBoxListDto> cashBoxListDtos = cashBoxList.stream()
+                .filter(i -> i.isMaturityEnabled() == isFinished)
                 .map(CashBoxListDto::new)
-                .toList();
+                .collect(Collectors.toList());
         return new CashBoxListResponseDto(cashBoxListDtos);
     }
 

@@ -27,8 +27,9 @@ public class CashBoxWriteService {
                 .productName(coreBankResponseDto.productName())
                 .startDate(coreBankResponseDto.startDate())
                 .maturityDate(coreBankResponseDto.maturityDate())
-                .maturityEnabled(coreBankResponseDto.maturityEnabled())
+                .maturityEnabled(false)
                 .build();
+        // 만기 여부 maturityEnabled
         cashBoxRepository.save(cashBox);
     }
 }

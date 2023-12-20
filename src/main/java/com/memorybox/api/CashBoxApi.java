@@ -17,8 +17,11 @@ public class CashBoxApi {
     private final CashBoxReadService cashBoxReadService;
     private final CreateCashBoxUsecase createCashBoxUsecase;
     @GetMapping("")
-    public ResponseEntity<?> getCashBoxList(@CookieValue(MEMORYBOX_USER_ID) long userId, @RequestParam boolean maturityEnabled) {
-        return ResponseEntity.ok(cashBoxReadService.getCashBoxList(userId));
+    public ResponseEntity<?> getCashBoxList(
+            @CookieValue(MEMORYBOX_USER_ID) long userId,
+            @RequestParam boolean requestIsFinished,
+            @RequestParam boolean requestChecked) {
+        return ResponseEntity.ok(cashBoxReadService.getCashBoxList(userId, requestIsFinished));
     }
 
     @GetMapping("/{cashBoxId}")

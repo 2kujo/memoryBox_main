@@ -1,4 +1,4 @@
-package com.memorybox.domain.entity.vo;
+package com.memorybox.domain.memory.entity.vo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
