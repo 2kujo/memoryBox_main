@@ -4,6 +4,7 @@ import com.memorybox.domain.memory.service.MemoryService;
 import com.memorybox.dto.request.MemoryCreateRequestDto;
 import com.memorybox.dto.response.MemoryListResponseDto;
 import com.memorybox.dto.response.MemoryResponseDto;
+import com.memorybox.usecase.MemoryDepositUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 public class MemoryApi {
 
     private final MemoryService memoryService;
+
+    private final MemoryDepositUseCase memoryDepositUseCase;
 
     @GetMapping("/memories")
     public ResponseEntity<?> getMemoryList(@PathVariable long cashBoxId) {
@@ -31,8 +34,7 @@ public class MemoryApi {
 
     @PostMapping("/memories")
     public ResponseEntity<?> createMemory(@PathVariable long cashBoxId, @ModelAttribute MemoryCreateRequestDto requestDto) {
-        memoryService.createMemory(cashBoxId, requestDto);
-
+        memoryDepositUseCase.createMemoryAndDeposit(cashBoxId, requestDto);
         return ResponseEntity.ok().build();
     }
 }
