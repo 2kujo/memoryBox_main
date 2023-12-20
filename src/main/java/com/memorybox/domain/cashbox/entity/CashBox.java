@@ -80,4 +80,7 @@ public class CashBox {
         checkedMaturityRead = true;
     }
 
+    public void addBalance(int depositAmount) {
+        balance += depositAmount;
+    }
 }

@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CashBoxWriteService {
     private final CashBoxRepository cashBoxRepository;
-    private static String defaultThumbnailImageUrl = "/";
+    private static final String defaultThumbnailImageUrl = "/";
     @Transactional
     public void createCashBox(long userId, CashBoxCreateRequestDto cashBoxCreateRequestDto, CoreBankResponseDto coreBankResponseDto) {
         CashBox cashBox = CashBox.builder()
@@ -35,8 +35,18 @@ public class CashBoxWriteService {
 
     @Transactional
     public void updateCashBox(long cashBoxId) {
-        CashBox cashBox = cashBoxRepository.findById(cashBoxId)
-                .orElseThrow(RuntimeException::new);
+        CashBox cashBox = getCashBox(cashBoxId);
         cashBox.readMaturity();
+    }
+
+    @Transactional
+    public void updateBalance(long cashBoxId, int depositAmount) {
+        CashBox cashBox = getCashBox(cashBoxId);
+        cashBox.addBalance(depositAmount);
+    }
+
+    private CashBox getCashBox(long cashBoxId) {
+        return cashBoxRepository.findById(cashBoxId)
+                .orElseThrow(RuntimeException::new);
     }
 }
