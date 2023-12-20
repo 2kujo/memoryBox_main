@@ -1,6 +1,5 @@
 package com.memorybox.dto.response;
 
-public record CoreBankDepositResponseDto(
-
+public record CoreBankDepositResponseDto(int deposit
 ) {
 }
