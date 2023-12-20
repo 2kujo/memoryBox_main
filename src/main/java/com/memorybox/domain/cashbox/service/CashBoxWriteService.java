@@ -34,7 +34,9 @@ public class CashBoxWriteService {
     }
 
     @Transactional
-    public void updateCashBox(long cashBoxId, CashBox) {
-
+    public void updateCashBox(long cashBoxId) {
+        CashBox cashBox = cashBoxRepository.findById(cashBoxId)
+                .orElseThrow(RuntimeException::new);
+        cashBox.readMaturity();
     }
 }

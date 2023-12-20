@@ -3,8 +3,6 @@ package com.memorybox.api;
 import com.memorybox.domain.cashbox.service.CashBoxReadService;
 import com.memorybox.domain.cashbox.service.CashBoxWriteService;
 import com.memorybox.dto.request.CashBoxCreateRequestDto;
-import com.memorybox.dto.request.CashBoxGetRequestDto;
-import com.memorybox.dto.request.CashBoxUpdateRequestDto;
 import com.memorybox.usecase.CreateCashBoxUsecase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +18,7 @@ public class CashBoxApi {
     private final CashBoxWriteService cashBoxWriteService;
 
     @GetMapping("")
-    public ResponseEntity<?> getCashBoxList(
-            @CookieValue(MEMORYBOX_USER_ID) long userId,
+    public ResponseEntity<?> getCashBoxList(@CookieValue(MEMORYBOX_USER_ID) long userId,
             @RequestParam boolean requestIsFinished) {
         return ResponseEntity.ok(cashBoxReadService.getCashBoxList(userId, requestIsFinished));
     }
@@ -36,8 +33,8 @@ public class CashBoxApi {
         return ResponseEntity.ok().build();
     }
     @PatchMapping("/{cashBoxId}")
-    public ResponseEntity<?> updateCashBox(@CookieValue(MEMORYBOX_USER_ID) long userId, @RequestBody CashBoxUpdateRequestDto cashBoxUpdateRequestDto) {
-        cashBoxWriteService.updateCashBox();
+    public ResponseEntity<?> updateCashBox(@PathVariable long cashBoxId) {
+        cashBoxWriteService.updateCashBox(cashBoxId);
         return ResponseEntity.ok().build();
     }
 }

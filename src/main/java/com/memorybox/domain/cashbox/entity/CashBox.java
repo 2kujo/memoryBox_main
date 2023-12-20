@@ -1,11 +1,12 @@
 package com.memorybox.domain.cashbox.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.data.relational.core.mapping.Column;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,6 +19,9 @@ public class CashBox {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column
+    private long coreBankId;
 
     @Column
     private long userId;
@@ -34,10 +38,6 @@ public class CashBox {
     @CreatedDate
     @Column
     private LocalDateTime createdAt;
-
-    // CoreBank 에서 가져온 계좌 정보
-    @Column
-    private long coreBankId;
 
     @Column
     private String accountNum;
@@ -57,6 +57,9 @@ public class CashBox {
     @Column
     private boolean maturityEnabled;
 
+    @Column(name = "checked_maturity_read")
+    private boolean checkedMaturityRead;
+
     @Builder
     public CashBox(long userId, String name, String description, String thumbnail, LocalDateTime createdAt, long coreBankId, String accountNum, int balance, String productName, LocalDate startDate, LocalDate maturityDate, boolean maturityEnabled) {
         this.userId = userId;
@@ -71,5 +74,9 @@ public class CashBox {
         this.startDate = startDate;
         this.maturityEnabled = maturityEnabled;
         this.maturityDate = maturityDate;
+    }
+
+    public void readMaturity() {
+        checkedMaturityRead = true;
     }
 }
