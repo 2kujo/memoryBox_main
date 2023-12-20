@@ -1,7 +1,6 @@
 package com.memorybox.domain.coreBank.service;
 
 import com.memorybox.dto.request.BalanceUpdateRequestDto;
-import com.memorybox.dto.response.CoreBankDepositResponseDto;
 import com.memorybox.dto.response.CoreBankResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -12,7 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequiredArgsConstructor
 @Service
 public class CoreBankAPIService {
-    private final String defaultApiUrl = "http://memory-external:8080/core-bank";
+    private final String defaultApiUrl = "http://memorybox-external:8080/core-bank";
     private final RestTemplate restTemplate;
 
     public CoreBankResponseDto fetchCashBoxDataFromCoreBankAPI(long userId, String productName) {
