@@ -41,7 +41,6 @@ public class MemoryService {
 
     @Transactional
     public void createMemory(long cashBoxId, MemoryCreateRequestDto requestDto) {
-        //이미지 저장 로직 -> 이후 비동기 처리 or API 별도 분리
         List<MultipartFile> imageFiles = requestDto.imageFiles();
         List<String> imageNames = imageService.saveImages(imageFiles);
 
