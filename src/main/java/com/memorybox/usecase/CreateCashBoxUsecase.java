@@ -18,7 +18,7 @@ public class CreateCashBoxUsecase {
     private final CashBoxWriteService cashBoxWriteService;
     private final CoreBankAPIService coreBankAPIService;
     @Transactional
-    public void execute(Long userId, CashBoxCreateRequestDto cashBoxCreateRequestDto) {
+    public void execute(long userId, CashBoxCreateRequestDto cashBoxCreateRequestDto) {
         /*
             외부 api를 통해 받아온 CoreBankResponseDto를 cashBoxWriteService에 넘겨준다.
          */

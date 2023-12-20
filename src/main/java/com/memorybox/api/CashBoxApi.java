@@ -17,7 +17,7 @@ public class CashBoxApi {
     private final CreateCashBoxUsecase createCashBoxUsecase;
     private final CashBoxWriteService cashBoxWriteService;
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<?> getCashBoxList(@CookieValue(MEMORYBOX_USER_ID) long userId, @RequestParam boolean isFinished) {
         return ResponseEntity.ok(cashBoxReadService.getCashBoxList(userId, isFinished));
     }
@@ -26,7 +26,7 @@ public class CashBoxApi {
     public ResponseEntity<?> getCashBox(@PathVariable long cashBoxId) {
         return ResponseEntity.ok(cashBoxReadService.getCashBox(cashBoxId));
     }
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<?> createCashBox(@CookieValue(MEMORYBOX_USER_ID) long userId, @RequestBody CashBoxCreateRequestDto cashBoxCreateRequestDto) {
         createCashBoxUsecase.execute(userId, cashBoxCreateRequestDto);
         return ResponseEntity.ok().build();
