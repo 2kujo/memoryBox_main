@@ -15,6 +15,8 @@ spec:
       labels:
         app: memorybox-main
     spec:
+      imagePullSecrets:
+      - name: dockerhub
       containers:
         - name: memorybox-main
           image: docker.io/hyeonkyo/memorybox-main:latest
