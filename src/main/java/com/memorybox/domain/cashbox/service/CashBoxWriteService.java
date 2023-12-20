@@ -32,4 +32,9 @@ public class CashBoxWriteService {
         // 만기 여부 maturityEnabled
         cashBoxRepository.save(cashBox);
     }
+
+    @Transactional
+    public void updateCashBox(long cashBoxId, CashBox) {
+
+    }
 }

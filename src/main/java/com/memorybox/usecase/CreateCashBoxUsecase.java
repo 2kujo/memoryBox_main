@@ -7,6 +7,7 @@ import com.memorybox.dto.request.CashBoxCreateRequestDto;
 import com.memorybox.dto.response.CoreBankResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -16,7 +17,7 @@ public class CreateCashBoxUsecase {
      */
     private final CashBoxWriteService cashBoxWriteService;
     private final CoreBankAPIService coreBankAPIService;
-
+    @Transactional
     public void execute(Long userId, CashBoxCreateRequestDto cashBoxCreateRequestDto) {
         /*
             외부 api를 통해 받아온 CoreBankResponseDto를 cashBoxWriteService에 넘겨준다.
