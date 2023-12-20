@@ -6,6 +6,6 @@ import java.util.List;
 
 @Builder
 public record MemoryListResponseDto(
-        List<MemoryListDto> cashBoxList
+        List<MemoryListDto> memoryList
 ) {
 }
