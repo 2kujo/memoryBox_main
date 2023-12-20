@@ -9,7 +9,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequiredArgsConstructor
 @Service
 public class CoreBankAPIService {
-    private final String defaultApiUrl = "/";
+    private final String defaultApiUrl = "http://memory-external:8080/";
     private final RestTemplate restTemplate;
 
     public CoreBankResponseDto fetchCashBoxDataFromCoreBankAPI(long userId, String productName) {

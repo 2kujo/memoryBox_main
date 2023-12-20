@@ -13,20 +13,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/cash-boxes")
 @RestController
 public class CashBoxApi {
+    public static final String MEMORYBOX_USER_ID = "memorybox-user-id";
     private final CashBoxReadService cashBoxReadService;
     private final CreateCashBoxUsecase createCashBoxUsecase;
-
     @GetMapping("")
-    public ResponseEntity<?> getCashBoxList(@CookieValue("memorybox-user-id") long userId, @RequestParam Boolean maturityEnabled) {
+    public ResponseEntity<?> getCashBoxList(@CookieValue(MEMORYBOX_USER_ID) long userId, @RequestParam boolean maturityEnabled) {
         return ResponseEntity.ok(cashBoxReadService.getCashBoxList(userId));
     }
 
     @GetMapping("/{cashBoxId}")
-    public ResponseEntity<?> getCashBox(@CookieValue("memorybox-user-id") long userId, @PathVariable long cashBoxId) {
+    public ResponseEntity<?> getCashBox(@CookieValue(MEMORYBOX_USER_ID) long userId, @PathVariable long cashBoxId) {
         return ResponseEntity.ok(cashBoxReadService.getCashBox(userId));
     }
-    @PostMapping("cash-boxes")
-    public ResponseEntity<?> createCashBox(@CookieValue("memorybox-user-id") long userId, @RequestBody CashBoxCreateRequestDto cashBoxCreateRequestDto) {
+    @PostMapping("")
+    public ResponseEntity<?> createCashBox(@CookieValue(MEMORYBOX_USER_ID) long userId, @RequestBody CashBoxCreateRequestDto cashBoxCreateRequestDto) {
         createCashBoxUsecase.execute(userId, cashBoxCreateRequestDto);
         return ResponseEntity.ok().build();
     }

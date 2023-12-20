@@ -17,7 +17,7 @@ import java.time.Duration;
 @Slf4j
 @RequiredArgsConstructor
 public class RestTemplateConfig {
-    private final String coreBankDefaultApiUrl = "/";
+    private final String coreBankDefaultApiUrl = "";
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
         return restTemplateBuilder

@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Builder
 public record CashBoxListDto(
-        Long cashBoxId,
+        long cashBoxId,
         String name,
         int balance,
         LocalDate startDate,

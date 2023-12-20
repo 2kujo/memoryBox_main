@@ -20,7 +20,7 @@ public class CashBox {
     private Long id;
 
     @Column
-    private Long userId;
+    private long userId;
 
     @Column
     private String name;
@@ -52,13 +52,13 @@ public class CashBox {
     private LocalDate startDate;
 
     @Column
-    private Boolean maturityEnabled;
-
-    @Column
     private LocalDate maturityDate;
 
+    @Column
+    private boolean maturityEnabled;
+
     @Builder
-    public CashBox(Long userId, String name, String description, String thumbnail, String accountNum, int balance, String productName, long coreBankId, LocalDateTime createdAt, LocalDate startDate, Boolean maturityEnabled, LocalDate maturityDate) {
+    public CashBox(long userId, String name, String description, String thumbnail, LocalDateTime createdAt, long coreBankId, String accountNum, int balance, String productName, LocalDate startDate, LocalDate maturityDate, boolean maturityEnabled) {
         this.userId = userId;
         this.name = name;
         this.description = description;

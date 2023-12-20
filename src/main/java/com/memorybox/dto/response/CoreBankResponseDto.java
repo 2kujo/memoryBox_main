@@ -10,7 +10,7 @@ public record CoreBankResponseDto(
         int balance,
         String productName,
         LocalDate startDate,
-        Boolean maturityEnabled,
+        boolean maturityEnabled,
         LocalDate maturityDate
 
 ) {
