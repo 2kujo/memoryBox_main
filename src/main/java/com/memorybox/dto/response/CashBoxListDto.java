@@ -1,18 +1,19 @@
 package com.memorybox.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.memorybox.domain.cashbox.entity.CashBox;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Builder
 public record CashBoxListDto(
         long cashBoxId,
         String name,
         int balance,
+        @JsonFormat(pattern = "yyyy.MM.dd")
         LocalDate startDate,
+        @JsonFormat(pattern = "yyyy.MM.dd")
         LocalDate maturityDate,
         String thumbnail
 ) {

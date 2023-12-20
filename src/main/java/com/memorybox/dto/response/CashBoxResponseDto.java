@@ -1,5 +1,6 @@
 package com.memorybox.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.memorybox.domain.cashbox.entity.CashBox;
 import lombok.Builder;
 
@@ -11,7 +12,9 @@ public record CashBoxResponseDto(
         String name,
         String description,
         int balance,
+        @JsonFormat(pattern = "yyyy.MM.dd")
         LocalDate startDate,
+        @JsonFormat(pattern = "yyyy.MM.dd")
         LocalDate maturityDate
 ) {
     public CashBoxResponseDto(CashBox entity) {

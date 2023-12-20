@@ -1,6 +1,6 @@
 package com.memorybox.dto.response;
 
-import org.springframework.data.relational.core.mapping.Column;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
 
@@ -9,7 +9,9 @@ public record CoreBankResponseDto(
         String accountNum,
         int balance,
         String productName,
+        @JsonFormat(pattern = "yyyy.MM.dd")
         LocalDate startDate,
+        @JsonFormat(pattern = "yyyy.MM.dd")
         LocalDate maturityDate
 
 ) {
