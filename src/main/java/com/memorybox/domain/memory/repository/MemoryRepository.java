@@ -1,7 +1,7 @@
-package com.memorybox.domain.repository;
+package com.memorybox.domain.memory.repository;
 
 
-import com.memorybox.domain.entity.Memory;
+import com.memorybox.domain.memory.entity.Memory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.memorybox.domain.entity;
+package com.memorybox.domain.memory.entity;
 
-import com.memorybox.domain.entity.vo.Image;
+import com.memorybox.domain.memory.entity.vo.Image;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

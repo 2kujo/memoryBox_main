@@ -1,4 +1,4 @@
-package com.memorybox.domain.service;
+package com.memorybox.domain.memory.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
