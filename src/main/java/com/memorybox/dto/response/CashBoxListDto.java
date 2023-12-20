@@ -15,9 +15,11 @@ public record CashBoxListDto(
         LocalDate startDate,
         @JsonFormat(pattern = "yyyy.MM.dd")
         LocalDate maturityDate,
-        String thumbnail
+        String thumbnail,
+        boolean maturityChecked
 ) {
     public CashBoxListDto(CashBox cashBox) {
-        this(cashBox.getId(), cashBox.getName(), cashBox.getBalance(),cashBox.getStartDate(),cashBox.getMaturityDate(),cashBox.getThumbnail());
+        this(cashBox.getId(), cashBox.getName(), cashBox.getBalance(),cashBox.getStartDate(),
+                cashBox.getMaturityDate(),cashBox.getThumbnail(), cashBox.isCheckedMaturityRead());
     }
 }
