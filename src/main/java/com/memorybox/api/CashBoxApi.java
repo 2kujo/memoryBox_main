@@ -23,8 +23,8 @@ public class CashBoxApi {
     }
 
     @GetMapping("/{cashBoxId}")
-    public ResponseEntity<?> getCashBox(@CookieValue(MEMORYBOX_USER_ID) long userId, @PathVariable long cashBoxId) {
-        return ResponseEntity.ok(cashBoxReadService.getCashBox(userId));
+    public ResponseEntity<?> getCashBox(@PathVariable long cashBoxId) {
+        return ResponseEntity.ok(cashBoxReadService.getCashBox(cashBoxId));
     }
     @PostMapping("")
     public ResponseEntity<?> createCashBox(@CookieValue(MEMORYBOX_USER_ID) long userId, @RequestBody CashBoxCreateRequestDto cashBoxCreateRequestDto) {

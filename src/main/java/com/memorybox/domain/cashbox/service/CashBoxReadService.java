@@ -2,7 +2,6 @@ package com.memorybox.domain.cashbox.service;
 
 import com.memorybox.domain.cashbox.entity.CashBox;
 import com.memorybox.domain.cashbox.repository.CashBoxRepository;
-import com.memorybox.domain.memory.entity.Memory;
 import com.memorybox.dto.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,8 @@ public class CashBoxReadService {
     }
 
     public CashBoxResponseDto getCashBox(long cashBoxId) {
-        CashBox cashBox = cashBoxRepository.findById(cashBoxId).orElseThrow(RuntimeException::new);
+        CashBox cashBox = cashBoxRepository.findById(cashBoxId)
+                .orElseThrow(RuntimeException::new);
         return new CashBoxResponseDto(cashBox);
     }
 }
