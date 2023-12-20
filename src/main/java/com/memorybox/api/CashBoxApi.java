@@ -4,6 +4,7 @@ import com.memorybox.domain.cashbox.service.CashBoxReadService;
 import com.memorybox.domain.cashbox.service.CashBoxWriteService;
 import com.memorybox.dto.request.CashBoxCreateRequestDto;
 import com.memorybox.usecase.CreateCashBoxUsecase;
+import jakarta.servlet.http.Cookie;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,8 @@ public class CashBoxApi {
     private final CashBoxWriteService cashBoxWriteService;
 
     @GetMapping
-    public ResponseEntity<?> getCashBoxList(@CookieValue(MEMORYBOX_USER_ID) long userId, @RequestParam boolean isFinished) {
+    public ResponseEntity<?> getCashBoxList(@CookieValue(MEMORYBOX_USER_ID) Cookie userIdCookie, @RequestParam boolean isFinished) {
+        long userId = Long.parseLong(userIdCookie.getValue());
         log.info(" [REQUEST] method = getCashBoxList / userId : {}, isFinished : {}", userId, isFinished);
         return ResponseEntity.ok(cashBoxReadService.getCashBoxList(userId, isFinished));
     }
@@ -31,7 +33,8 @@ public class CashBoxApi {
         return ResponseEntity.ok(cashBoxReadService.getCashBox(cashBoxId));
     }
     @PostMapping
-    public ResponseEntity<?> createCashBox(@CookieValue(MEMORYBOX_USER_ID) long userId, @RequestBody CashBoxCreateRequestDto cashBoxCreateRequestDto) {
+    public ResponseEntity<?> createCashBox(@CookieValue(MEMORYBOX_USER_ID) Cookie userIdCookie, @RequestBody CashBoxCreateRequestDto cashBoxCreateRequestDto) {
+        long userId = Long.parseLong(userIdCookie.getValue());
         log.info(" [REQUEST] method = createCashBox / userId : {}, cashBoxCreateRequestDto : {}", userId, cashBoxCreateRequestDto);
         createCashBoxUsecase.execute(userId, cashBoxCreateRequestDto);
         return ResponseEntity.ok().build();
