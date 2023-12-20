@@ -22,6 +22,11 @@ spec:
           env:
             - name: PORT
               value: "8080"
+          envFrom:
+            - configMapRef:
+                name: memorybox-cm
+            - secretRef:
+                name: memorybox-secret
           ports:
             - name: port1
               containerPort: 8081
@@ -41,30 +46,6 @@ spec:
           persistentVolumeClaim:
             claimName: memory-box
             readOnly: false
-
----
-
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: memorybox-main
-  namespace: ikujo
-data:
-  DB_SERVER: svc-mysql
-  DB_PORT: "3306"
-  DB_NAME: "memory_box"
-
----
-
-kind: Secret
-apiVersion: v1
-metadata:
-  name: memorybox-main
-  namespace: ikujo
-type: Opaque
-data:
-  DB_USERNAME: aWt1am8=           #echo root | base64
-  DB_PASSWORD: Mmt1ajAh           #echo P@ssw0rd$ | base64
 
 ---
 

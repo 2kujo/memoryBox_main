@@ -1,6 +1,6 @@
 spring:
   application:
-    name: memoryBox_external
+    name: memoryBox_main
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://${DB_SERVER:165.192.105.57}:${DB_PORT:30135}/${DB_NAME:memory_box}?useUnicode=true&characterEncoding=utf-8
