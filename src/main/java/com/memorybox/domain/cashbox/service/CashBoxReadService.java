@@ -18,7 +18,7 @@ public class CashBoxReadService {
     public CashBoxListResponseDto getCashBoxList(long userId, boolean isFinished) {
         List<CashBox> cashBoxList = cashBoxRepository.findAllByUserId(userId);
         List<CashBoxListDto> cashBoxListDtos = cashBoxList.stream()
-                .filter(i -> i.isMaturityEnabled() == isFinished)
+                .filter(c -> c.isMaturityEnabled() == isFinished)
                 .map(CashBoxListDto::new)
                 .collect(Collectors.toList());
         return new CashBoxListResponseDto(cashBoxListDtos);

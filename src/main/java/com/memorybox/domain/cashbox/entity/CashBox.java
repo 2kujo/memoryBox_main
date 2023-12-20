@@ -79,4 +79,5 @@ public class CashBox {
     public void readMaturity() {
         checkedMaturityRead = true;
     }
+
 }
