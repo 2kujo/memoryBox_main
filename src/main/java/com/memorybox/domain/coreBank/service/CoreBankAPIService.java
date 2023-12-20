@@ -12,7 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequiredArgsConstructor
 @Service
 public class CoreBankAPIService {
-    private final String defaultApiUrl = "http://memorybox-ikujo-back.165.192.105.60.nip.io/external/core-bank";
+    private final String defaultApiUrl = "http://memory-external:8080/core-bank";
     private final RestTemplate restTemplate;
 
     public CoreBankResponseDto fetchCashBoxDataFromCoreBankAPI(long userId, String productName) {
@@ -25,7 +25,6 @@ public class CoreBankAPIService {
     }
 
     public Integer depositMoney(long coreBankId, int depositAmount) {
-        //restTemplate = new RestTemplate(new HttpComponents)
         String url = UriComponentsBuilder.fromUriString(defaultApiUrl)
                 .path("/balance")
                 .build()
