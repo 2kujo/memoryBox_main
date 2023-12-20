@@ -11,7 +11,6 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 
 @Configuration
@@ -25,9 +24,8 @@ public class RestTemplateConfig {
                 .requestFactory(() -> new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()))
                 .setConnectTimeout(Duration.ofMillis(5000)) // connection-timeout
                 .setReadTimeout(Duration.ofMillis(5000)) // read-timeout
-
-                .additionalMessageConverters(new StringHttpMessageConverter(StandardCharsets.UTF_8))
-                .rootUri(coreBankDefaultApiUrl)
+                .additionalMessageConverters(new StringHttpMessageConverter(Charset.forName("UTF-8")))
+                .rootUri(String.format(coreBankDefaultApiUrl))
                 .build();
     }
 
