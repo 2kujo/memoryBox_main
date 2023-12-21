@@ -30,7 +30,7 @@ public class MemoryApi {
     }
 
     @GetMapping("/memories/{memoryId}")
-    public ResponseEntity<?> getMemory(@PathVariable long memoryId) {
+    public ResponseEntity<?> getMemory(@PathVariable long cashBoxId, @PathVariable long memoryId) {
         log.info(" [REQUEST] method = getMemory / memoryId : {} ", memoryId);
         MemoryResponseDto dto = memoryService.getMemory(memoryId);
         log.info(" [RESPONSE] method = getMemory / MemoryResponseDto : {} ", dto);

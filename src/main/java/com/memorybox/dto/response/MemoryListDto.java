@@ -24,7 +24,7 @@ public record MemoryListDto(
     }
 
     private static String getImageName(List<Image> images) {
-        if (images.get(0) == null) {
+        if (images == null || images.size() == 0) {
             return "/";
         }
         return images.get(0).getImageName();
