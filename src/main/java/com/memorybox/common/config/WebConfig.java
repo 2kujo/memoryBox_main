@@ -12,12 +12,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("*")
-//                .allowedOrigins(
-//                        "http://localhost:80",
-//                        "http://localhost:8080",
-//                        "http://memorybox-fe:8080",
-//                        "http://memorybox-ikujo.165.192.105.60.nip.io")
+                .allowedOrigins(
+                        "http://localhost:80",
+                        "http://localhost:8080",
+                        "http://memorybox-fe:8080",
+                        "http://memorybox-ikujo.165.192.105.60.nip.io")
                 .allowedMethods("GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true)
