@@ -1,5 +1,6 @@
 package com.memorybox.domain.coreBank.service;
 
+import com.memorybox.dto.request.AccountCreateRequestDto;
 import com.memorybox.dto.request.BalanceUpdateRequestDto;
 import com.memorybox.dto.response.CoreBankResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -16,11 +17,11 @@ public class CoreBankAPIService {
 
     public CoreBankResponseDto fetchCashBoxDataFromCoreBankAPI(long userId, String productName) {
         String urlWithParameters = UriComponentsBuilder.fromUriString(defaultApiUrl)
-                .queryParam("userId", userId)
-                .queryParam("productName", productName)
+                .path("/account")
                 .build()
                 .toUriString();
-        return restTemplate.getForObject(urlWithParameters, CoreBankResponseDto.class);
+        AccountCreateRequestDto requestDto = new AccountCreateRequestDto(userId, productName);
+        return restTemplate.postForObject(urlWithParameters, requestDto, CoreBankResponseDto.class);
     }
 
     public Integer depositMoney(long coreBankId, int depositAmount) {
