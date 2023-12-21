@@ -1,14 +1,15 @@
 package com.memorybox.usecase;
 
-import com.memorybox.domain.cashbox.service.CashBoxReadService;
 import com.memorybox.domain.cashbox.service.CashBoxWriteService;
 import com.memorybox.domain.coreBank.service.CoreBankAPIService;
 import com.memorybox.dto.request.CashBoxCreateRequestDto;
 import com.memorybox.dto.response.CoreBankResponseDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class CreateCashBoxUsecase {
@@ -23,6 +24,7 @@ public class CreateCashBoxUsecase {
             외부 api를 통해 받아온 CoreBankResponseDto를 cashBoxWriteService에 넘겨준다.
          */
         CoreBankResponseDto coreBankResponseDto = coreBankAPIService.fetchCashBoxDataFromCoreBankAPI(userId, cashBoxCreateRequestDto.productName());
+        log.info("CoreBank Response Dto = {}", coreBankResponseDto);
         cashBoxWriteService.createCashBox(userId, cashBoxCreateRequestDto, coreBankResponseDto);
     }
 }
