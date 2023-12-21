@@ -39,7 +39,16 @@ public class ImageService {
 
     private String makeFileName(MultipartFile imageFile) {
         UUID uuid = UUID.randomUUID();
-        return String.format("%s_%s", imageFile.getOriginalFilename(), uuid);
+
+        String originalFilename = imageFile.getOriginalFilename();
+        String imageName = originalFilename;
+        String fileExtension = "png";
+        int i = originalFilename.lastIndexOf('.');
+        if (i >= 0) {
+            fileExtension = originalFilename.substring(i + 1);
+            imageName = originalFilename.substring(0, i);
+        }
+        return String.format("%s_%s.%s", imageName, uuid, fileExtension);
     }
 
     private void saveFile(MultipartFile file, String imageFilePath) {
