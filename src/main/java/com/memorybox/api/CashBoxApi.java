@@ -1,10 +1,10 @@
 package com.memorybox.api;
 
+import com.memorybox.common.resolver.CertUserId;
 import com.memorybox.domain.cashbox.service.CashBoxReadService;
 import com.memorybox.domain.cashbox.service.CashBoxWriteService;
 import com.memorybox.dto.request.CashBoxCreateRequestDto;
 import com.memorybox.usecase.CreateCashBoxUsecase;
-import jakarta.servlet.http.Cookie;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +15,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/cash-boxes")
 @RestController
 public class CashBoxApi {
-    public static final String MEMORYBOX_USER_ID = "memorybox-user-id";
     private final CashBoxReadService cashBoxReadService;
     private final CreateCashBoxUsecase createCashBoxUsecase;
     private final CashBoxWriteService cashBoxWriteService;
 
     @GetMapping
-    public ResponseEntity<?> getCashBoxList(@CookieValue(value = MEMORYBOX_USER_ID) Cookie userIdCookie, @RequestParam boolean isFinished) {
-        long userId = Long.parseLong(userIdCookie.getValue());
+    public ResponseEntity<?> getCashBoxList(@CertUserId long userId, @RequestParam boolean isFinished) {
         log.info(" [REQUEST] method = getCashBoxList / userId : {}, isFinished : {}", userId, isFinished);
         return ResponseEntity.ok(cashBoxReadService.getCashBoxList(userId, isFinished));
     }
@@ -33,8 +31,7 @@ public class CashBoxApi {
         return ResponseEntity.ok(cashBoxReadService.getCashBox(cashBoxId));
     }
     @PostMapping
-    public ResponseEntity<?> createCashBox(@CookieValue(value = MEMORYBOX_USER_ID) Cookie userIdCookie, @RequestBody CashBoxCreateRequestDto cashBoxCreateRequestDto) {
-        long userId = Long.parseLong(userIdCookie.getValue());
+    public ResponseEntity<?> createCashBox(@CertUserId long userId, @RequestBody CashBoxCreateRequestDto cashBoxCreateRequestDto) {
         log.info(" [REQUEST] method = createCashBox / userId : {}, cashBoxCreateRequestDto : {}", userId, cashBoxCreateRequestDto);
         createCashBoxUsecase.execute(userId, cashBoxCreateRequestDto);
         return ResponseEntity.ok().build();
