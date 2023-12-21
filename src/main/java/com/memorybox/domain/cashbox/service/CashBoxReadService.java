@@ -19,10 +19,14 @@ public class CashBoxReadService {
     public CashBoxListResponseDto getCashBoxList(long userId, boolean isFinished) {
         List<CashBox> cashBoxList = cashBoxRepository.findAllByUserId(userId);
         log.info("cashBoxList 개수 = {}", cashBoxList.size());
+        if (cashBoxList.size() != 0) {
+            log.info("cashBoxList 1번 = {}", cashBoxList.get(0));
+        }
         List<CashBoxListDto> cashBoxListDtos = cashBoxList.stream()
                 .filter(c -> c.isMaturityEnabled() == isFinished)
                 .map(CashBoxListDto::new)
                 .collect(Collectors.toList());
+        log.info("CashBoxListDto 개수 = {}", cashBoxListDtos.size());
         return new CashBoxListResponseDto(cashBoxListDtos);
     }
 
