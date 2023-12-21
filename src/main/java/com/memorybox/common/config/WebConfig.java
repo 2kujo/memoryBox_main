@@ -27,7 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
 //                        "http://memorybox-ikujo.165.192.105.60.nip.io")
                 .allowedMethods("GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
-                .allowCredentials(false)
+                .allowCredentials(true)
                 .maxAge(MAX_AGE_SECS);
     }
 
