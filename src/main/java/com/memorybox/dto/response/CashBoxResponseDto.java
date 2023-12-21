@@ -15,9 +15,12 @@ public record CashBoxResponseDto(
         @JsonFormat(pattern = "yyyy.MM.dd")
         LocalDate startDate,
         @JsonFormat(pattern = "yyyy.MM.dd")
-        LocalDate maturityDate
+        LocalDate maturityDate,
+
+        boolean finished
 ) {
     public CashBoxResponseDto(CashBox entity) {
-        this(entity.getId(), entity.getName(), entity.getDescription(), entity.getBalance(), entity.getStartDate(), entity.getMaturityDate());
+        this(entity.getId(), entity.getName(), entity.getDescription(), entity.getBalance(), entity.getStartDate(),
+                entity.getMaturityDate(), entity.isMaturityEnabled());
     }
 }
