@@ -1,25 +1,31 @@
 package com.memorybox.domain.memory.service;
 
+import com.memorybox.domain.memory.util.FileSaveUtil;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Slf4j
+@RequiredArgsConstructor
 @Service
 public class ImageService {
 
     public static final String UPLOAD_FOLDER = "/root/data/";
 
+    private final FileSaveUtil fileSaveUtil;
+
     public List<String> saveImages(List<MultipartFile> imageFiles) {
         List<String> imageNames = new ArrayList<>();
         if (imageFiles != null) {
             for (MultipartFile file : imageFiles) {
+                if (file == null || file.isEmpty()) {
+                    continue;
+                }
                 String imageFileName = saveImage(file);
                 log.info(" >>> Save Image file name = {}", imageFileName);
                 imageNames.add(imageFileName);
@@ -32,7 +38,7 @@ public class ImageService {
         String imageFileName = makeFileName(imageFile);
         String imageFilePath = UPLOAD_FOLDER.concat(imageFileName);
 
-        saveFile(imageFile, imageFilePath);
+        fileSaveUtil.saveFile(imageFile, imageFilePath);
 
         return imageFileName;
     }
@@ -51,12 +57,4 @@ public class ImageService {
         return String.format("%s_%s.%s", imageName, uuid, fileExtension);
     }
 
-    private void saveFile(MultipartFile file, String imageFilePath) {
-        File destinationFile = new File(imageFilePath);
-        try {
-            file.transferTo(destinationFile);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
