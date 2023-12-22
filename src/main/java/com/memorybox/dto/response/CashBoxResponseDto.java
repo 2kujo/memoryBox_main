@@ -10,17 +10,12 @@ import java.time.LocalDate;
 public record CashBoxResponseDto(
         long cashBoxId,
         String name,
-        String description,
+        String accountNum,
+        String productName,
         int balance,
-        @JsonFormat(pattern = "yyyy.MM.dd")
-        LocalDate startDate,
-        @JsonFormat(pattern = "yyyy.MM.dd")
-        LocalDate maturityDate,
-
         boolean finished
 ) {
     public CashBoxResponseDto(CashBox entity) {
-        this(entity.getId(), entity.getName(), entity.getDescription(), entity.getBalance(), entity.getStartDate(),
-                entity.getMaturityDate(), entity.isMaturityEnabled());
+        this(entity.getId(), entity.getName(), entity.getAccountNum(), entity.getProductName(), entity.getBalance(), entity.isMaturityEnabled());
     }
 }
