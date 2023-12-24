@@ -1,7 +1,7 @@
 package com.memorybox.domain.memory.service;
 
-import com.memorybox.domain.memory.repository.MemoryRepository;
 import com.memorybox.domain.memory.entity.Memory;
+import com.memorybox.domain.memory.repository.MemoryRepository;
 import com.memorybox.dto.request.MemoryCreateRequestDto;
 import com.memorybox.dto.response.MemoryCreateResponseDto;
 import com.memorybox.dto.response.MemoryListDto;
@@ -24,7 +24,7 @@ public class MemoryService {
 
     @Transactional(readOnly = true)
     public MemoryListResponseDto getMemoryList(long cashBoxId) {
-        List<Memory> memoryList = memoryRepository.findAllByCashBoxId(cashBoxId);
+        List<Memory> memoryList = memoryRepository.findAllByCashBoxIdOrderByCreatedAtDesc(cashBoxId);
 
         List<MemoryListDto> memoryListDtos = memoryList.stream()
                 .map(MemoryListDto::new)

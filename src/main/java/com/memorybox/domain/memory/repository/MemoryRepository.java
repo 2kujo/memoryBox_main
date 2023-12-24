@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface MemoryRepository extends JpaRepository<Memory, Long> {
 
-    List<Memory> findAllByCashBoxId(long cashBoxId);
+    List<Memory> findAllByCashBoxIdOrderByCreatedAtDesc(long cashBoxId);
 }
