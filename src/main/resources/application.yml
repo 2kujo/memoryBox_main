@@ -18,6 +18,10 @@ spring:
       maximum-pool-size: 30
       minimum-idle: 2
       connection-test-query: SELECT 1
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
 
 #swagger
 springdoc:
